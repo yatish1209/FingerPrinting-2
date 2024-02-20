@@ -34,22 +34,14 @@
 
         // Collect WLAN signal strength and Cellular signal strength (Example values)
         var wlanSignalStrength = getWLANSignalStrength();
-        // var cellularSignalStrength = getCellularSignalStrength();
-        // var latency_measure = measureLatency();
-        // var bandwidth_measure = measureBandwidth();
-        var url = 'https://www.google.com';
-        
-
+        var cellularSignalStrength = getCellularSignalStrength();
 
         // Prepare the data to be submitted
         var formData = new FormData();
         formData.append('data[latitude]', latitude);
         formData.append('data[longitude]', longitude);
         formData.append('data[wlan_strength]', wlanSignalStrength);
-        // formData.append('data[cellular_strength]', cellularSignalStrength);
-        // formData.append('data[latency]', latency_measure);
-        // formData.append('data[bandwidth]', bandwidth_measure);
-
+        formData.append('data[cellular_strength]', cellularSignalStrength);
 
         // Submit the form data
         fetch('https://sheetdb.io/api/v1/w3rcsxtqatd69', {
@@ -84,44 +76,34 @@
 }
 
 
-//     // Function to get Cellular signal latency
-// function measureLatency(url) {
-//     return new Promise((resolve, reject) => {
-//         var startTime = performance.now();
-//         fetch(url)
-//             .then(response => {
-//                 var endTime = performance.now();
-//                 var latency = endTime - startTime;
-//                 console.log('Latency (ms):', latency);
-//                 resolve(latency);
-//             })
-//             .catch(error => {
-//                 console.error('Error:', error);
-//                 reject(error);
-//             });
-//     });
-// }
-
-// // Function to get Cellular signal bandwidth
-// function measureBandwidth(url) {
-//     return new Promise((resolve, reject) => {
-//         var fileSize = 1 * 1024 * 1024; // 1 MB file size
-//         var startTime = performance.now();
-//         fetch(url, { method: 'HEAD' })
-//             .then(response => {
-//                 var endTime = performance.now();
-//                 var downloadTime = endTime - startTime;
-//                 var bandwidth = (fileSize / downloadTime) * 8; // Convert bytes to bits and divide by time in seconds
-//                 console.log('Bandwidth (Mbps):', bandwidth);
-//                 resolve(bandwidth);
-//             })
-//             .catch(error => {
-//                 console.error('Error:', error);
-//                 reject(error);
-//             });
-//     });
-// }
-
+    // Function to get Cellular signal latency (Example function)
+    function measureLatency(www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj6w_K7tbaEAxUmTWwGHTeiBv0QPAgJ) {
+    var startTime = performance.now();
+    fetch(www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj6w_K7tbaEAxUmTWwGHTeiBv0QPAgJ)
+        .then(response => {
+            var endTime = performance.now();
+            var latency = endTime - startTime;
+            console.log('Latency (ms):', latency);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+    // Function to get Cellular signal latency
+    function measureBandwidth(url) {
+    var fileSize = 1 * 1024 * 1024; // 1 MB file size
+    var startTime = performance.now();
+    fetch(url, { method: 'HEAD' })
+        .then(response => {
+            var endTime = performance.now();
+            var downloadTime = endTime - startTime;
+            var bandwidth = (fileSize / downloadTime) * 8; // Convert bytes to bits and divide by time in seconds
+            console.log('Bandwidth (Mbps):', bandwidth);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
 
 
 </script>
