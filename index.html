@@ -84,34 +84,44 @@
 }
 
 
-    // Function to get Cellular signal latency (Example function)
-    function measureLatency(url) {
-    var startTime = performance.now();
-    fetch(url)
-        .then(response => {
-            var endTime = performance.now();
-            var latency = endTime - startTime;
-            console.log('Latency (ms):', latency);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    // Function to get Cellular signal latency
+function measureLatency(url) {
+    return new Promise((resolve, reject) => {
+        var startTime = performance.now();
+        fetch(url)
+            .then(response => {
+                var endTime = performance.now();
+                var latency = endTime - startTime;
+                console.log('Latency (ms):', latency);
+                resolve(latency);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                reject(error);
+            });
+    });
 }
-    // Function to get Cellular signal bandwidth
-    function measureBandwidth(url) {
-    var fileSize = 1 * 1024 * 1024; // 1 MB file size
-    var startTime = performance.now();
-    fetch(url, { method: 'HEAD' })
-        .then(response => {
-            var endTime = performance.now();
-            var downloadTime = endTime - startTime;
-            var bandwidth = (fileSize / downloadTime) * 8; // Convert bytes to bits and divide by time in seconds
-            console.log('Bandwidth (Mbps):', bandwidth);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+
+// Function to get Cellular signal bandwidth
+function measureBandwidth(url) {
+    return new Promise((resolve, reject) => {
+        var fileSize = 1 * 1024 * 1024; // 1 MB file size
+        var startTime = performance.now();
+        fetch(url, { method: 'HEAD' })
+            .then(response => {
+                var endTime = performance.now();
+                var downloadTime = endTime - startTime;
+                var bandwidth = (fileSize / downloadTime) * 8; // Convert bytes to bits and divide by time in seconds
+                console.log('Bandwidth (Mbps):', bandwidth);
+                resolve(bandwidth);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                reject(error);
+            });
+    });
 }
+
 
 
 </script>
