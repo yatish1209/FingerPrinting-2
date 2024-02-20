@@ -35,8 +35,8 @@
         // Collect WLAN signal strength and Cellular signal strength (Example values)
         var wlanSignalStrength = getWLANSignalStrength();
         var cellularSignalStrength = getCellularSignalStrength();
-        var latency = measureLatency();
-        var bandwidth = measureBandwidth();
+        var latency_measure = measureLatency();
+        var bandwidth_measure = measureBandwidth();
         var url = 'https://www.google.com';
         
 
@@ -47,8 +47,8 @@
         formData.append('data[longitude]', longitude);
         formData.append('data[wlan_strength]', wlanSignalStrength);
         formData.append('data[cellular_strength]', cellularSignalStrength);
-        formData.append('data[latency]', latency);
-        formData.append('data[bandwidth]', bandwidth);
+        formData.append('data[latency]', latency_measure);
+        formData.append('data[bandwidth]', bandwidth_measure);
 
 
         // Submit the form data
