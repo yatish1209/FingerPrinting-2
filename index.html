@@ -37,6 +37,9 @@
         var cellularSignalStrength = getCellularSignalStrength();
         var latency = measureLatency();
         var bandwidth = measureBandwidth();
+        var url = 'https://www.google.com';
+        
+
 
         // Prepare the data to be submitted
         var formData = new FormData();
@@ -46,6 +49,7 @@
         formData.append('data[cellular_strength]', cellularSignalStrength);
         formData.append('data[latency]', latency);
         formData.append('data[bandwidth]', bandwidth);
+
 
         // Submit the form data
         fetch('https://sheetdb.io/api/v1/w3rcsxtqatd69', {
@@ -81,9 +85,9 @@
 
 
     // Function to get Cellular signal latency (Example function)
-    function measureLatency(www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj6w_K7tbaEAxUmTWwGHTeiBv0QPAgJ) {
+    function measureLatency(url) {
     var startTime = performance.now();
-    fetch(www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj6w_K7tbaEAxUmTWwGHTeiBv0QPAgJ)
+    fetch(url)
         .then(response => {
             var endTime = performance.now();
             var latency = endTime - startTime;
@@ -94,10 +98,10 @@
         });
 }
     // Function to get Cellular signal bandwidth
-    function measureBandwidth(www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj6w_K7tbaEAxUmTWwGHTeiBv0QPAgJ) {
+    function measureBandwidth(url) {
     var fileSize = 1 * 1024 * 1024; // 1 MB file size
     var startTime = performance.now();
-    fetch(www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj6w_K7tbaEAxUmTWwGHTeiBv0QPAgJ, { method: 'HEAD' })
+    fetch(url, { method: 'HEAD' })
         .then(response => {
             var endTime = performance.now();
             var downloadTime = endTime - startTime;
