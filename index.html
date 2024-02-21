@@ -33,15 +33,21 @@
         var longitude = document.getElementById('longitudeInput').value;
 
         // Collect WLAN signal strength and Cellular signal strength (Example values)
-        var wlanSignalStrength = getWLANSignalStrength();
-        var cellularSignalStrength = getCellularSignalStrength();
+        // var wlanSignalStrength = getWLANSignalStrength();
+        // var cellularSignalStrength = getCellularSignalStrength();
+        var url = 'http://www.google.com/';
+        var loadtime = measureResourceLoadTime(url);
+        var hostname = 'http://www.google.com/';
+        var iterations = 5; // Number of ping requests to average
+        var rtt = measureAverageRTT(hostname, iterations);
+
 
         // Prepare the data to be submitted
         var formData = new FormData();
         formData.append('data[latitude]', latitude);
         formData.append('data[longitude]', longitude);
-        formData.append('data[wlan_strength]', wlanSignalStrength);
-        formData.append('data[cellular_strength]', cellularSignalStrength);
+        // formData.append('data[wlan_strength]', wlanSignalStrength);
+        // formData.append('data[cellular_strength]', cellularSignalStrength);
 
         // Submit the form data
         fetch('https://sheetdb.io/api/v1/w3rcsxtqatd69', {
@@ -59,51 +65,66 @@
         });
     }
 
-    // Function to get WLAN signal strength
-    function getWLANSignalStrength() {
-    if (navigator.connection && navigator.connection.type === 'wifi') {
-        // If the connection type is WiFi, try to get the WLAN signal strength
-        if (navigator.connection.wifi) {
-            return navigator.connection.wifi.signalStrength;
-        } else {
-            // If the signal strength information is not available, return an error message or handle it accordingly
-            return 'Signal strength information not available';
-        }
-    } else {
-        // If the connection type is not WiFi, return an error message or handle it accordingly
-        return 'Not connected to WiFi';
+//     // Function to get WLAN signal strength
+//     function getWLANSignalStrength() {
+//     if (navigator.connection && navigator.connection.type === 'wifi') {
+//         // If the connection type is WiFi, try to get the WLAN signal strength
+//         if (navigator.connection.wifi) {
+//             return navigator.connection.wifi.signalStrength;
+//         } else {
+//             // If the signal strength information is not available, return an error message or handle it accordingly
+//             return 'Signal strength information not available';
+//         }
+//     } else {
+//         // If the connection type is not WiFi, return an error message or handle it accordingly
+//         return 'Not connected to WiFi';
+//     }
+// }
+
+    function measureResourceLoadTime(url) {
+    var startTime = performance.now();
+
+    fetch(url)
+    .then(response => {
+        var endTime = performance.now();
+        var loadTime = endTime - startTime;
+        console.log('Resource Load Time (ms):', loadTime);
+    })
+    .catch(error => {
+        console.error('Failed to load resource:', error);
+    });
+}
+
+    function measureAverageRTT(hostname, iterations) {
+    var totalRTT = 0;
+
+    function pingOnce() {
+        var startTime = performance.now();
+
+        fetch('https://' + hostname, { method: 'HEAD' })
+        .then(response => {
+            var endTime = performance.now();
+            var rtt = endTime - startTime;
+            totalRTT += rtt;
+            console.log('RTT (ms):', rtt);
+        })
+        .catch(error => {
+            console.error('Failed to ping:', error);
+        });
     }
+
+    for (var i = 0; i < iterations; i++) {
+        pingOnce();
+    }
+
+    setTimeout(function() {
+        var averageRTT = totalRTT / iterations;
+        console.log('Average RTT (ms):', averageRTT);
+    }, 1000); // Adjust timeout as needed to ensure all requests complete
 }
 
 
-    // Function to get Cellular signal latency (Example function)
-    function measureLatency(www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj6w_K7tbaEAxUmTWwGHTeiBv0QPAgJ) {
-    var startTime = performance.now();
-    fetch(www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj6w_K7tbaEAxUmTWwGHTeiBv0QPAgJ)
-        .then(response => {
-            var endTime = performance.now();
-            var latency = endTime - startTime;
-            console.log('Latency (ms):', latency);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
-    // Function to get Cellular signal latency
-    function measureBandwidth(url) {
-    var fileSize = 1 * 1024 * 1024; // 1 MB file size
-    var startTime = performance.now();
-    fetch(url, { method: 'HEAD' })
-        .then(response => {
-            var endTime = performance.now();
-            var downloadTime = endTime - startTime;
-            var bandwidth = (fileSize / downloadTime) * 8; // Convert bytes to bits and divide by time in seconds
-            console.log('Bandwidth (Mbps):', bandwidth);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
+
 
 
 </script>
