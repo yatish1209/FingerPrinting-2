@@ -83,19 +83,31 @@
 //     }
 // }
 
-    function measureResourceLoadTime(url) {
-    var startTime = performance.now();
+//     function measureResourceLoadTime(url) {
+//     var startTime = performance.now();
 
-    fetch(url)
-    .then(response => {
-        var endTime = performance.now();
-        var loadTime = endTime - startTime;
-        console.log('Resource Load Time (ms):', loadTime);
-    })
-    .catch(error => {
-        console.error('Failed to load resource:', error);
+//     fetch(url)
+//     .then(response => {
+//         var endTime = performance.now();
+//         var loadTime = endTime - startTime;
+//         console.log('Resource Load Time (ms):', loadTime);
+//     })
+//     .catch(error => {
+//         console.error('Failed to load resource:', error);
+//     });
+// }
+
+    function measureResourceLoadTime(url) {
+    return new Promise((resolve, reject) => {
+        // Simulate fetching resource load time with a random value between 1 and 20
+        setTimeout(() => {
+            var randomLoadTime = Math.floor(Math.random() * 20) + 1; // Random number between 1 and 20
+            console.log('Resource Load Time (ms):', randomLoadTime);
+            resolve(randomLoadTime);
+        }, 1000); // Simulate a delay to mimic network latency
     });
 }
+
 
     function measureAverageRTT(hostname, iterations) {
     var totalRTT = 0;
@@ -103,16 +115,13 @@
     function pingOnce() {
         var startTime = performance.now();
 
-        fetch('https://' + hostname, { method: 'HEAD' })
-        .then(response => {
+        // Simulate fetching RTT with a random value between 1 and 20
+        setTimeout(() => {
             var endTime = performance.now();
             var rtt = endTime - startTime;
             totalRTT += rtt;
             console.log('RTT (ms):', rtt);
-        })
-        .catch(error => {
-            console.error('Failed to ping:', error);
-        });
+        }, Math.random() * 1000); // Simulate varying response times
     }
 
     for (var i = 0; i < iterations; i++) {
@@ -124,6 +133,35 @@
         console.log('Average RTT (ms):', averageRTT);
     }, 1000); // Adjust timeout as needed to ensure all requests complete
 }
+
+
+//     function measureAverageRTT(hostname, iterations) {
+//     var totalRTT = 0;
+
+//     function pingOnce() {
+//         var startTime = performance.now();
+
+//         fetch('https://' + hostname, { method: 'HEAD' })
+//         .then(response => {
+//             var endTime = performance.now();
+//             var rtt = endTime - startTime;
+//             totalRTT += rtt;
+//             console.log('RTT (ms):', rtt);
+//         })
+//         .catch(error => {
+//             console.error('Failed to ping:', error);
+//         });
+//     }
+
+//     for (var i = 0; i < iterations; i++) {
+//         pingOnce();
+//     }
+
+//     setTimeout(function() {
+//         var averageRTT = totalRTT / iterations;
+//         console.log('Average RTT (ms):', averageRTT);
+//     }, 1000); // Adjust timeout as needed to ensure all requests complete
+// }
 
 
 
